@@ -402,3 +402,145 @@ public class StringBufferDeleteDemo {
     }
 }
 <img width="411" height="60" alt="5c" src="https://github.com/user-attachments/assets/d2850b30-15bd-4e3d-a1de-73ba7bc9b703" />
+
+##exp 6a
+import java.util.Scanner;
+
+public class ExceptionArray {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter size of array: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter element at index " + i + ": ");
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.print("Enter index to access: ");
+        int index = sc.nextInt();
+
+        try {
+            System.out.println("Element at index " + index + " is: " + arr[index]);
+        } 
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid index! Please enter index between 0 and " + (n - 1));
+        }
+
+        sc.close();
+    }
+} 
+
+<img width="475" height="164" alt="6a" src="https://github.com/user-attachments/assets/c4e19f8d-1508-42f7-851b-c4c02c2b27b5" />
+
+## 6b
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class MultipleCatchExample {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int[] arr = {10, 20, 30, 40, 50};
+
+        try {
+
+            System.out.print("Enter first number: ");
+            int a = sc.nextInt();
+
+            System.out.print("Enter second number: ");
+            int b = sc.nextInt();
+
+            int result = a / b;
+            System.out.println("Result = " + result);
+
+            System.out.print("Enter index to access array element: ");
+            int index = sc.nextInt();
+
+            System.out.println("Element at index = " + arr[index]);
+        }
+
+        catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero is not allowed.");
+        }
+
+        catch (InputMismatchException e) {
+            System.out.println("Error: Please enter numeric values only.");
+        }
+
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Invalid array index.");
+        }
+
+        catch (Exception e) {
+            System.out.println("Some other error occurred.");
+        }
+
+        System.out.println("Program continues...");
+
+        sc.close();
+    }
+} 
+<img width="425" height="117" alt="6b4" src="https://github.com/user-attachments/assets/d52b2299-9494-46ff-84d7-20ee61861d65" />
+<img width="433" height="145" alt="6b3" src="https://github.com/user-attachments/assets/ddf6b6a0-63eb-46c8-81d9-d6d12d0068ec" />
+<img width="373" height="154" alt="6b2" src="https://github.com/user-attachments/assets/93adad22-ff9f-46df-aa56-1db057de57b4" />
+<img width="357" height="140" alt="6b" src="https://github.com/user-attachments/assets/93adea67-3c0c-4f27-99e5-ca539f9efa25" />
+
+##6c
+import java.util.Scanner;
+
+public class MultipleExceptionExample {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+
+            System.out.print("Enter an integer to divide 100: ");
+            int n = sc.nextInt();
+
+            int result = 100 / n;
+            System.out.println("Result = " + result);
+
+            int[] arr = new int[3];
+            System.out.println("Accessing element: " + arr[5]);
+
+            System.out.print("Enter a number as text: ");
+            String s = sc.next();
+
+            int num = Integer.parseInt(s);
+            System.out.println("Converted number = " + num);
+        }
+
+        catch (ArithmeticException e) { 
+            System.out.println("ArithmeticException: division by zero.");
+        }
+
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException: invalid index.");
+        }
+
+        catch (NumberFormatException e) {
+            System.out.println("NumberFormatException: invalid numeric format.");
+        }
+
+        catch (Exception e) {
+            System.out.println("Some other exception occurred.");
+        }
+
+        System.out.println("Program continues...");
+
+        sc.close();
+<img width="519" height="124" alt="6c" src="https://github.com/user-attachments/assets/d9a59c39-9678-4dcb-939d-fda3427c8008" />
+
+
+
+
