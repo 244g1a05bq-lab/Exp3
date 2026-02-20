@@ -3,22 +3,16 @@ class Student {
     String name;
     int age;
     double marks;
-
-    // Default constructor
     Student() {
         name = "Not Assigned";
         age = 0;
         marks = 0.0;
     }
-
-    // Parameterized constructor
     Student(String name, int age, double marks) {
         this.name = name;
         this.age = age;
         this.marks = marks;
     }
-
-    // Method to display details
     void display() {
         System.out.println("Name: " + this.name);
         System.out.println("Age: " + this.age);
@@ -28,14 +22,9 @@ class Student {
 
 class Main {
     public static void main(String[] args) {
-
-        // Using default constructor
         Student std = new Student();
         std.display();
-
         System.out.println();
-
-        // Using parameterized constructor
         Student std1 = new Student("Usha", 40, 67.8);
         std1.display();
     }
@@ -45,11 +34,7 @@ class Main {
 
 ##3b
 import java.util.Scanner;
-
-// Logic Class
 class BinarySearch {
-
-    // Method to sort array (Bubble Sort)
     void sort(int[] arr, int n) {
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -61,27 +46,21 @@ class BinarySearch {
             }
         }
     }
-
-    // Method to perform Binary Search
     int search(int[] arr, int n, int key) {
         int low = 0;
         int high = n - 1;
-
         while (low <= high) {
             int mid = (low + high) / 2;
-
             if (arr[mid] == key) {
-                return mid + 1; // 1-based position
+                return mid + 1;
             } else if (arr[mid] < key) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
-        return -1; // Element not found
+        return -1; 
     }
-
-    // Display array
     void display(int[] arr, int n) {
         for (int i = 0; i < n; i++) {
             System.out.print(arr[i] + " ");
@@ -405,33 +384,24 @@ public class StringBufferDeleteDemo {
 
 ##exp 6a
 import java.util.Scanner;
-
 public class ExceptionArray {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-
         System.out.print("Enter size of array: ");
         int n = sc.nextInt();
-
         int[] arr = new int[n];
-
         for (int i = 0; i < n; i++) {
             System.out.print("Enter element at index " + i + ": ");
             arr[i] = sc.nextInt();
         }
-
         System.out.print("Enter index to access: ");
         int index = sc.nextInt();
-
         try {
             System.out.println("Element at index " + index + " is: " + arr[index]);
         } 
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid index! Please enter index between 0 and " + (n - 1));
         }
-
         sc.close();
     }
 } 
@@ -441,50 +411,34 @@ public class ExceptionArray {
 ## 6b
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
 public class MultipleCatchExample {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-
         int[] arr = {10, 20, 30, 40, 50};
-
         try {
-
             System.out.print("Enter first number: ");
             int a = sc.nextInt();
-
             System.out.print("Enter second number: ");
             int b = sc.nextInt();
-
             int result = a / b;
             System.out.println("Result = " + result);
-
             System.out.print("Enter index to access array element: ");
             int index = sc.nextInt();
-
             System.out.println("Element at index = " + arr[index]);
         }
-
         catch (ArithmeticException e) {
             System.out.println("Error: Division by zero is not allowed.");
         }
-
         catch (InputMismatchException e) {
             System.out.println("Error: Please enter numeric values only.");
         }
-
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Invalid array index.");
         }
-
         catch (Exception e) {
             System.out.println("Some other error occurred.");
         }
-
         System.out.println("Program continues...");
-
         sc.close();
     }
 } 
@@ -494,52 +448,148 @@ public class MultipleCatchExample {
 <img width="357" height="140" alt="6b" src="https://github.com/user-attachments/assets/93adea67-3c0c-4f27-99e5-ca539f9efa25" />
 
 ##6c
+
 import java.util.Scanner;
-
 public class MultipleExceptionExample {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-
         try {
-
             System.out.print("Enter an integer to divide 100: ");
             int n = sc.nextInt();
-
             int result = 100 / n;
             System.out.println("Result = " + result);
-
             int[] arr = new int[3];
             System.out.println("Accessing element: " + arr[5]);
-
             System.out.print("Enter a number as text: ");
             String s = sc.next();
-
             int num = Integer.parseInt(s);
             System.out.println("Converted number = " + num);
         }
-
         catch (ArithmeticException e) { 
             System.out.println("ArithmeticException: division by zero.");
         }
-
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("ArrayIndexOutOfBoundsException: invalid index.");
         }
-
         catch (NumberFormatException e) {
             System.out.println("NumberFormatException: invalid numeric format.");
         }
-
         catch (Exception e) {
             System.out.println("Some other exception occurred.");
         }
-
         System.out.println("Program continues...");
-
         sc.close();
 <img width="519" height="124" alt="6c" src="https://github.com/user-attachments/assets/d9a59c39-9678-4dcb-939d-fda3427c8008" />
+
+
+##7a
+class UserRegion {
+    void registerUser(String userName, String userCountry)
+            throws InvalidCountryException {
+        if (!userCountry.equals("India")) {
+            throw new InvalidCountryException(
+                "User outside India cannot be registered"
+            );
+        } else {
+            System.out.println("User registration done successfully");
+        }
+    }
+}
+public class UserRegistration {
+    public static void main(String[] args) {
+        UserRegion ur = new UserRegion();
+        try {
+            ur.registerUser("Ravi", "USA");
+        } catch (InvalidCountryException e) {
+            System.out.println(e.getMessage());
+        try {
+            ur.registerUser("Anita", "India");
+        } catch (InvalidCountryException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+<img width="366" height="77" alt="7a" src="https://github.com/user-attachments/assets/63bc671f-9c35-47c9-ac33-c56a231e8feb" />
+
+##7b
+
+class GoodMorningThread extends Thread {
+    public void run() {
+        while (true) {
+            System.out.println("Good Morning");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("Exception in GoodMorningThread: " + e);
+class HelloThread extends Thread {
+    public void run() {
+        while (true) {
+            System.out.println("Hello");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println("Exception in HelloThread: " + e);
+            }
+        }
+    }
+}
+class WelcomeThread extends Thread {
+    public void run() {
+        while (true) {
+            System.out.println("Welcome");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.out.println("Exception in WelcomeThread: " + e);
+public class TestThreads {
+    public static void main(String[] args) {
+        GoodMorningThread t1 = new GoodMorningThread();
+        HelloThread t2 = new HelloThread();
+        WelcomeThread t3 = new WelcomeThread();
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+
+<img width="420" height="452" alt="7b" src="https://github.com/user-attachments/assets/8676c350-60ab-4232-99a4-6abd1b4aa4a5" />
+
+##7c
+
+
+class LongRunningTask extends Thread {
+    public void run() {
+        System.out.println("Long running task started...");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Working... " + i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println("Exception: " + e);
+            }
+        }
+        System.out.println("Long running task completed!");
+    }
+}
+public class ThreadDemo {
+    public static void main(String[] args) {
+        LongRunningTask task1 = new LongRunningTask();
+        System.out.println("Before starting task1: " + task1.isAlive());
+        task1.start();
+        System.out.println("After starting task1: " + task1.isAlive());
+        System.out.println("Main thread waiting for task1 to complete using join()...");
+        try {
+            task1.
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted: " + e);
+        }
+        System.out.println("After join(): " + task1.isAlive());
+        System.out.println("Main thread continues after task1 completed");
+    }
+}
+
+<img width="728" height="336" alt="7c" src="https://github.com/user-attachments/assets/b82021a4-cd8d-42b8-9dd6-077df05e9460" />
 
 
 
