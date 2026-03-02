@@ -591,6 +591,149 @@ public class ThreadDemo {
 
 <img width="728" height="336" alt="7c" src="https://github.com/user-attachments/assets/b82021a4-cd8d-42b8-9dd6-077df05e9460" />
 
+##8a
+class DaemonThread extends Thread {
+    public void run() {
+        try {
+            while (true) {
+                System.out.println("Daemon thread running...");
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Daemon thread interrupted");
+        }
+    }
+}
+class UserThread extends Thread {
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("User thread iteration: " + i);
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("User thread interrupted");
+        }
+    }
+}
+public class TestDaemon {
+    public static void main(String[] args) {
+        UserThread ut = new UserThread();
+        DaemonThread dt = new DaemonThread();
+        dt.setDaemon(true);
+        ut.start();
+        dt.start();
+        System.out.println("Main thread ends...");
+    }
+}
+
+<img width="356" height="320" alt="8a" src="https://github.com/user-attachments/assets/61231ebd-67e9-48df-926c-93822942cd18" />
+
+##8b
+class SharedBuffer {
+    int[] buffer;
+    int count = 0;
+    int in = 0;
+    int out = 0;
+    SharedBuffer(int size) {
+        buffer = new int[size];
+    }
+    synchronized void produce(int item) throws InterruptedException {
+        while (count == buffer.length) {
+            wait();
+        }
+        buffer[in] = item;
+        in = (in + 1) % buffer.length;
+        count++;
+        notify();
+    }
+    synchronized int consume() throws InterruptedException {
+        while (count == 0) {
+            wait();
+        }
+        int item = buffer[out];
+        out = (out + 1) % buffer.length;
+        count--;
+        notify();
+        return item;
+    }
+}
+class Producer extends Thread {
+    private SharedBuffer buffer;
+    Producer(SharedBuffer buffer) {
+        this.buffer = buffer;
+    }
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                buffer.produce(i);
+                System.out.println("Produced: " + i);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+class Consumer extends Thread {
+    private SharedBuffer buffer;
+    Consumer(SharedBuffer buffer) {
+        this.buffer = buffer;
+    }
+    public void run() {
+        try {
+            for (int i = 1; i <= 5; i++) {
+                int item = buffer.consume();
+                System.out.println("Consumed: " + item);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// Main Class
+public class ProducerConsumer {
+    public static void main(String[] args) {
+        SharedBuffer buffer = new SharedBuffer(5);
+        Producer p = new Producer(buffer);
+        Consumer c = new Consumer(buffer);
+        p.start();
+        c.start();
+    }
+}
+
+<img width="302" height="220" alt="8b" src="https://github.com/user-attachments/assets/7b504367-5c91-49d9-8a8b-7889fcd108a5" />
+
+##8c
+package arithmetic;
+public class ArithmeticOperations {
+
+  // Method for addition
+    public int addition(int x, int y) {
+        return x + y;
+    }
+    // Method for subtraction
+    public int subtraction(int x, int y) {
+        return x - y;
+    }
+    // Method for multiplication
+    public int multiplication(int x, int y) {
+        return x * y;
+    }
+    // Method for division
+    public int division(int x, int y) {
+        return x / y;
+    }
+}
+
+<img width="210" height="115" alt="8c" src="https://github.com/user-attachments/assets/2c3ebff7-a8cc-45d2-bb77-451cdc1e4d87" />
+
+
+
+
+
+
+
 
 
 
