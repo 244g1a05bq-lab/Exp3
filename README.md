@@ -729,6 +729,63 @@ public class ArithmeticOperations {
 <img width="210" height="115" alt="8c" src="https://github.com/user-attachments/assets/2c3ebff7-a8cc-45d2-bb77-451cdc1e4d87" />
 
 
+## 11
+// Railway Reservation System using Synchronization
+class Reservation {
+    int availableBerths;
+    // Constructor
+    Reservation(int berths) {
+        availableBerths = berths;
+    }
+    // Synchronized method for booking tickets
+    synchronized void bookTicket(String personName, int requestedBerths) {
+        System.out.println(personName + " trying to reserve " + requestedBerths + " berth(s)");
+        if (requestedBerths <= availableBerths) {
+            System.out.println("Berths available. Booking ticket for " + personName);
+            availableBerths = availableBerths - requestedBerths;
+            System.out.println("Ticket booked for " + personName);
+            System.out.println("Remaining berths: " + availableBerths);
+        } else {
+            System.out.println("Sorry " + personName + ", No berths available.");
+        }
+        System.out.println("-----------------------------------");
+    }
+}
+// Person class extending Thread
+class Person extends Thread {
+    Reservation reservation;
+    int berthsNeeded;
+    Person(Reservation reservation, String name, int berths) {
+        super(name);
+        this.reservation = reservation;
+        this.berthsNeeded = berths;
+    }
+    // Thread execution
+    public void run() {
+        reservation.bookTicket(getName(), berthsNeeded);
+    }
+}
+// Main class
+public class RailwayReservation {
+    public static void main(String[] args) {
+        // Step 1: Define total berths
+        Reservation reservation = new Reservation(5);
+        // Step 7: Create multiple Person threads
+        Person p1 = new Person(reservation, "Ravi", 2);
+        Person p2 = new Person(reservation, "Anita", 1);
+        Person p3 = new Person(reservation, "Rahul", 3);
+        Person p4 = new Person(reservation, "Sneha", 1);
+        // Step 8: Start threads
+        p1.start();
+        p2.start();
+        p3.start();
+        p4.start();
+    }
+}
+
+
+<img width="536" height="419" alt="Screenshot 2026-03-05 150332" src="https://github.com/user-attachments/assets/fad5c4be-ea04-4730-b88f-3df45f1a4228" />
+
 
 
 
