@@ -1,4 +1,4 @@
-  ##3a                                                                              Student.java
+<img width="477" height="720" alt="image" src="https://github.com/user-attachments/assets/9b62b43f-1f27-4d0f-a0a3-ebd185c7c515" />  ##3a                                                                              Student.java
 class Student {
     String name;
     int age;
@@ -787,9 +787,76 @@ public class RailwayReservation {
 <img width="536" height="419" alt="Screenshot 2026-03-05 150332" src="https://github.com/user-attachments/assets/fad5c4be-ea04-4730-b88f-3df45f1a4228" />
 
 
+##Additional expirement 5
+
+import java.util.Scanner;
+class Cricket {
+    String playerName;
+    String teamName;
+    double battingAverage;
+    // Constructor
+    Cricket(String playerName, String teamName, double battingAverage) {
+        this.playerName = playerName;
+        this.teamName = teamName;
+        this.battingAverage = battingAverage;
+    }
+    // Method to display player details
+    void display() {
+        System.out.println("Player Name: " + playerName);
+        System.out.println("Team Name: " + teamName);
+        System.out.println("Batting Average: " + battingAverage);
+        System.out.println();
+    }
+}
+public class CricketTeamWiseList {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Input number of players
+        System.out.print("Enter number of players: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        // Array of Cricket objects
+        Cricket[] players = new Cricket[n];
+        // Input player details
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for player " + (i + 1));
+            System.out.print("Player Name: ");
+            String playerName = sc.nextLine();
+            System.out.print("Team Name: ");
+            String teamName = sc.nextLine();
+            System.out.print("Batting Average: ");
+            double battingAverage = sc.nextDouble();
+            sc.nextLine();
+            players[i] = new Cricket(playerName, teamName, battingAverage);
+        }
+        // Generate team-wise list
+        System.out.println("\n--- Team Wise Player List ---");
+        for (int i = 0; i < n; i++) {
+            boolean teamPrinted = false;
+            // Check if this team already printed
+            for (int j = 0; j < i; j++) {
+                if (players[i].teamName.equals(players[j].teamName)) {
+                    teamPrinted = true;
+                    break;
+                }
+            }
+            // If team not printed earlier
+            if (!teamPrinted) {
+                System.out.println("\nTeam: " + players[i].teamName);
+                for (int k = 0; k < n; k++) {
+                    if (players[k].teamName.equals(players[i].teamName)) {
+                        System.out.println("Player: " + players[k].playerName +
+                                " | Batting Average: " + players[k].battingAverage);
+                    }
+                }
+            }
+        }
+        sc.close();
+    }
+}
 
 
 
 
 
-
+<img width="477" height="720" alt="Screenshot 2026-03-05 151108" src="https://github.com/user-attachments/assets/49a14d2c-88ce-485b-a60f-061d9927b603" />
